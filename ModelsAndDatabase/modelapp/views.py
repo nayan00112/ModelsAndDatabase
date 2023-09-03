@@ -13,8 +13,10 @@ def home(requests):
     #create object of form, which will use to print form on template.
     f = Table1()
 
+    print(requests.user)
     # object of model, here it is useful to print all existing data to the template.  
-    t = Table1_models.objects.all()
+    t = Table1_models.objects.filter(user_name = requests.user)
+
 
     # Let's print above object on terminal. 
     # for i in (list(t)):
@@ -32,13 +34,14 @@ def home(requests):
         name = requests.POST["name"]
         email = requests.POST["email"]
         desc = requests.POST["desc"]
+        userid = requests.POST["iduser"]
 
         # display data to the terminal. 
         # print(name, email, desc)
 
         # Save fatched data to the database. 
-        m1 = Table1_models(name = name, email = email, desc = desc)
-
+        m1 = Table1_models(name = name, email = email, desc = desc, user_name = userid)
+        print(userid)
         # finally store data to the database. 
         m1.save()
 

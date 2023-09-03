@@ -65,6 +65,7 @@
     </nav>
     <h1 class="h">Hello Models!</h1>
     <hr>
+    {% if user.is_authenticated %}
     <h3>Enter data and save it.</h3>
     <!-- Print Form -->
     <div class="f">
@@ -72,6 +73,7 @@
         <form method="post">
             {% csrf_token %}
             {{tb.as_p}}
+            <input type="text" name="iduser" id="iduser" hidden value="{{user.username}}">
             <input type="submit" value="submit">
         </form>
         {% endif %}
@@ -95,6 +97,12 @@
         </ol>
         {% endif %}
     </div>
+
+    {% else %}
+
+    <h2>Log in must required!</h2>
+    {% endif %}
+    
 </body>
 
 </html>
